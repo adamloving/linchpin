@@ -7,6 +7,8 @@ function onMessage(request, sender, sendResponse) {
   console.log("content script got", request);
   scanPage();
 }
+chrome.extension.onMessage.addListener(onMessage);
+console.log('listening')
 
 // regex = /page_id=([0-9]*)/
 // m = regex.exec(document.body.innerHTML);
@@ -24,21 +26,28 @@ function onMessage(request, sender, sendResponse) {
 //   console.log('no match')
 // }
 
+function grabUrls() {
+  var urls = [];
+  var classNames = ['feed-photo', 'profilePic', 'UFIActorImage', 'photo', 'groups', 'avatar'];
+
+  for (i in classNames) {
+    var els = document.getElementsByClassName(classNames[i]);  
+    console.log(els);
+    for (j = 0; j < els.length; j++) {
+      var url = els[j].src;
+      console.log(url);
+      if (urls.indexOf(url) == -1) {
+        urls.push(url);
+      }
+    }
+  }
+
+  return urls;
+}
+
 function scanPage() {
   
-  var els = [];
-  var profilePics = document.getElementsByClassName('profilePic');
-  for (i in profilePics) { els.push(profilePics[i]); }
-  profilePics = document.getElementsByClassName('UFIActorImage');
-  for (i in profilePics) { els.push(profilePics[i]); }
-
-  var urls = [];
-
-  for (i in els) {
-    var url = els[i].src;
-    console.log(url);
-    urls.push(url);
-  }
+  var urls = grabUrls();
 
   chrome.extension.sendMessage({
       data: {
@@ -51,5 +60,3 @@ function scanPage() {
     }
   );
 }
-
-chrome.extension.onMessage.addListener(onMessage);

@@ -13,7 +13,13 @@
     "http://facebook.com/*",
     "http://www.facebook.com/*",
     "https://facebook.com/*",
-    "https://www.facebook.com/*"
+    "https://www.facebook.com/*",
+    "http://www.linkedin.com/*",
+    "http://linkedin.com/*",
+    "https://www.linkedin.com/*",
+    "https://linkedin.com/*",
+    "http://twitter.com/*",
+    "https://twitter.com/*"
   ], 
   "background": {
     "scripts": ["background.js"]
@@ -24,7 +30,13 @@
           "http://facebook.com/*",
           "http://www.facebook.com/*",
           "https://facebook.com/*",
-          "https://www.facebook.com/*"
+          "https://www.facebook.com/*",
+          "http://www.linkedin.com/*",
+          "http://linkedin.com/*",
+          "https://www.linkedin.com/*",
+          "https://linkedin.com/*",
+          "http://twitter.com/*",
+          "https://twitter.com/*"
         ],
         "js" : ["content_script.js"],
         "run_at" : "document_idle",
